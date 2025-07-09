@@ -39,11 +39,13 @@ The AI model is built using **LightGBM**, and is integrated into the project via
 -Forgot Password for email notification sent via SMTP
 ## 📂 Project Screen Shoot
 
-![Ekran görüntüsü 2025-05-26 143730](https://github.com/user-attachments/assets/9f590f3d-c090-419d-b1ed-6b4ebea03e69)
+![Ekran görüntüsü 2025-05-29 114150](https://github.com/user-attachments/assets/a35c333d-3480-4ab9-8f52-648cb0dac67e)
+![Ekran görüntüsü 2025-05-29 204246](https://github.com/user-attachments/assets/00d4f535-1956-44b6-ae6a-d912e7699b5f)
 
-![Ekran görüntüsü 2025-05-29 204246](https://github.com/user-attachments/assets/3470277e-301b-4cab-bca8-87e7e6b84d61)
+![Ekran görüntüsü 2025-05-27 131800](https://github.com/user-attachments/assets/b27a9b5f-820a-4e91-8f47-a3cd731e06bd)
 
-![Ekran görüntüsü 2025-05-27 131800](https://github.com/user-attachments/assets/3a67ab41-98a2-4bf6-aa54-5d5029971c73)
+![Ekran görüntüsü 2025-05-29 204131](https://github.com/user-attachments/assets/a0c49a71-587a-4933-a9ca-beab4d1e0cbd)
 
-![Ekran görüntüsü 2025-05-29 204131](https://github.com/user-attachments/assets/f7dbc264-9052-48d3-bff0-aa1c8dd44bf4)
+
+
 
