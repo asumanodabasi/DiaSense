@@ -1,0 +1,202 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .ml-0 {
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-expand-md {
+        display: none !important;
+    }
+   
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+@keyframes gradientBg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+body {
+    margin-bottom: 60px;
+    font-family: Arial, sans-serif;
+    animation: gradientBg 100s ease infinite;
+    background-size: 300% 300%;
+    background: url('/img/Saglik-AI-scaled.webp') no-repeat;
+}
+
+
+#sidebar {
+    width: 250px;
+    height: 90vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #212529;
+    color: white;
+    padding: 10px;
+    /*transition: transform 0.3s ease-in-out;*/
+    transition: left 0.3s ease;
+}
+
+    #sidebar a {
+        color: white !important;
+        text-decoration: none;
+        display: flex;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        align-items: center;
+        border-bottom:none;
+    }
+
+        #sidebar a:hover, .sidebar .active {
+            background-color: gray;
+            color: white;
+            padding: 5px;
+        }
+
+        #sidebar a i {
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+    /* Sidebar kapandýðýnda ikonlar ortada olsun */
+    #sidebar.collapsed a {
+        justify-content: center;
+    }
+
+        #sidebar.collapsed a i {
+            margin-left: 175px;
+        }
+
+    #sidebar.collapsed .sidetext {
+        display: none;
+    }
+
+.collapsed {
+    transform: translateX(-80%);
+}
+
+#content {
+    flex-grow: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar-open {
+    margin-top: 0 !important;
+    top: 0;
+    overflow-x: hidden;
+}
+
+   /* .sidebar-open #content {
+        margin-left: 260px;
+    }*/
+
+  
+
+.sidebar-closed #content {
+    margin-left: 0;
+}
+
+#toggleSidebar {
+    position: fixed;
+    top: 0px;
+    left: 210px;
+    z-index: 1000; /* Üstte kalmasýný saðlar */
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.chart-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+
+
+body.auth-collapsed #content {
+    margin-left: 0px;
+}
+
+body.auth-collapsed .sidebar-open #content {
+    margin-left: 260px;
+}
+
+body.auth-collapsed .sidebar-closed #content{
+    margin-left: 260px;
+}
+
+body.guest .sidebar-open #content {
+    margin-left: 260px;
+}
+
+body.guest.auth-collapsed.sidebar-closed #content {
+    margin-left: 0px;
+}

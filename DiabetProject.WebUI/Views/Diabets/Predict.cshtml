@@ -1,0 +1,211 @@
+﻿@using DiabetProject.BLL.Data.Dto
+@using DiabetProject.BLL.Extensions
+@using static DiabetProject.BLL.Data.Dto.Enums
+@model DiagnosisDto
+
+
+
+<div class="grid">
+    <div class="card">
+        <div class="card-header">
+            <h2>Diyabet Tahmin Formu</h2>
+        </div>
+        <div class="card-body">
+            <form id="predictionForm" method="post">
+
+                @{
+                    var genderList = Enum.GetValues(typeof(Gender))
+                    .Cast<Gender>()
+                    .Select(s => new SelectListItem
+            {
+                Value = ((int)s).ToString(),
+                Text = s.GetDisplayName()          // Display(Name = "...")’den gelen metin
+            });
+                    var section = Enum.GetValues(typeof(Section))
+                    .Cast<Section>()
+                    .Select(s => new SelectListItem
+            {
+                Value = ((int)s).ToString(),
+                Text = s.GetDisplayName()
+            });
+                    var smooking = Enum.GetValues(typeof(Smooking))
+                    .Cast<Smooking>()
+                    .Select(s => new SelectListItem
+            {
+                Value = ((int)s).ToString(),
+                Text = s.GetDisplayName()
+            });
+                }
+
+                <div class="form-group">
+                    <label class="control-label">Cinsiyet</label>
+                    <select class="form-control" asp-for="Gender" asp-items="genderList"></select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label class="control-label">Yaş</label>
+                    <input class="form-control" asp-for="Age" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label">Tansiyon</label>
+                    <select class="form-control" asp-for="Hypertension" asp-items="section"></select>
+                    <span asp-validation-for="Hypertension" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Kalp Hastalığı</label>
+                    <select class="form-control" asp-for="HeartDisease" asp-items="section"></select>
+                    <span asp-validation-for="HeartDisease" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Sigara Geçmişi</label>
+                    <select class="form-control" asp-for="SmokingHistory" asp-items="smooking"></select>
+                    <span asp-validation-for="SmokingHistory" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label">Kilo</label>
+                    <input class="form-control" asp-for="Weight" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Boy</label>
+                    <input class="form-control" asp-for="Height" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">HbA1c Seviyesi</label>
+                    <input class="form-control" asp-for="HbA1cLevel" />
+                    <span asp-validation-for="HbA1cLevel" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Glukoz Seviyesi</label>
+                    <input class="form-control" asp-for="BloodGlucoseLevel" />
+                    <span asp-validation-for="BloodGlucoseLevel" class="text-danger"></span>
+                </div>
+                
+
+                <div class="form-group">
+                    <div class="button-container">
+
+                        <button id="kaydetBtn" class="btn btn-outline-info" type="submit"> Tahmin Et ve Değerleri Kaydet </button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="bilgiModal" tabindex="-1" role="dialog" aria-labelledby="modalBaslik" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h4 class="modal-title" id="modalBaslik"></h4>
+
+            </div>
+            <div class="modal-body">
+                Bilgileriniz kaydoldu. Kendi sayfanıza yönlendiriliyorusunuz..
+            </div>
+
+        </div>
+</div>
+
+
+
+<style>
+    .button-container {
+        text-align: right; /* Aligns the button to the right */
+        margin-top: 20px; /* Adds space above the button */
+        margin-right: 20px; /* Adds space from the right */
+
+    }
+
+    
+    body{
+        background: url("/img/shwc-header-2400x1200.webp");
+    }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1); /* transparan beyaz */
+            backdrop-filter: blur(8px); /* cam efekti */
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: black;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+</style>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#kaydetBtn").click(function (event) {
+                event.preventDefault();
+
+                var formData = $("#predictionForm").serialize();
+                // Tahmin işlemi
+                $.ajax({
+                    type: "POST",
+                    url: "/Diabets/Predict",
+                    data: formData,
+                    success: function (response) {
+                        if (response.prediction) {
+                            // Modal başlığını güncelle
+                            $("#modalBaslik").text("Sonuç: " + response.pre);
+
+                            var predict = response.prediction;
+                            if (predict === 1) {
+                                $(".modal-header").addClass("alert-danger").removeClass("alert-success");
+                            } else {
+                                $(".modal-header").addClass("alert-success").removeClass("alert-danger");
+                            }
+
+                            console.log(predict);
+                            $('#bilgiModal').modal('show');
+
+                            var fullData = formData + "&Predict=" + encodeURIComponent(predict);
+                            // Kayıt işlemi
+                            $.ajax({
+                                type: "POST",
+                                url: "/add",
+                                data: fullData,
+                                success: function () {
+                                    setTimeout(function () {
+                                        window.location.href = "/GetAllByUser";
+                                    }, 3000);
+                                },
+                                error: function (xhr, status, error) {
+                                    alert("Kayıt hatası: " + error);
+                                }
+                            });
+                        } else {
+                            alert("Tahmin işlemi başarısız!");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Tahmin hatası: " + xhr.responseText);
+                    }
+                });
+            });
+
+        });
+    </script>
+}
+

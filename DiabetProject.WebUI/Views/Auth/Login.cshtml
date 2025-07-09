@@ -1,0 +1,37 @@
+﻿@using DiabetProject.BLL.Data.Dto
+@model LoginDto
+
+
+
+
+<div class="col-md-4 ms-auto me-auto mydiv" style="padding-top:50px;">
+
+    <div class="box">
+        <div class="card-header">
+            <h3 style="font-family:Arial,sans-serif;">Login</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Login" asp-controller="Auth" method="post">
+                <div class="mb-3">
+                    <label asp-for="@Model.UserNameOrEmail" class="form-label" >Kullanıcı Adı veya Email</label>
+                    <input class="form-control" asp-for="@Model.UserNameOrEmail" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Password" class="form-label" >Şifre</label>
+                    <input class="form-control" type="password" asp-for="@Model.Password" />
+                </div>
+                <div class="float-start text-white p-2">
+                    <a asp-action="ForgotPassword" class="btn btn-outline-info">Şifremi Unuttum</a> @* buraya bakılcak tekrar *@
+                </div>
+                <div class="float-end text-white p-2">
+                    <button type="submit" class="btn btn-outline-success">Giriş Yap</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    
+
+
+</style>
